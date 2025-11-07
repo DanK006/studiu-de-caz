@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Studiu de Caz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #238636;
+            --secondary-color: #2ea043;
+            --dark-bg: #0d1117;
+            --header-bg: #161b22;
+            --card-bg: #21262d;
+            --text-color: #f0f6fc;
+            --border-color: #30363d;
+            --accent-color: #58a6ff;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--header-bg);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--header-bg) 0%, var(--card-bg) 100%);
+            border-radius: 10px;
+            padding: 50px 40px;
+            margin: 30px 0;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+        
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-secondary {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--header-bg);
+            border-color: var(--accent-color);
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+        
+        .main-content, .sidebar {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+        }
+        
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        
+        h3 {
+            font-size: 20px;
+            margin: 25px 0 15px;
+            color: var(--accent-color);
+        }
+        
+        h4 {
+            font-size: 18px;
+            margin: 20px 0 10px;
+            color: var(--accent-color);
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        li:before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+        }
+        
+        .card {
+            background-color: var(--header-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .card h4 {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card h4 i {
+            margin-right: 10px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .feature-card {
+            background-color: var(--header-bg);
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+        
+        .feature-card i {
+            font-size: 24px;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--header-bg);
+            color: var(--text-color);
+        }
+        
+        footer {
+            background-color: var(--header-bg);
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .social-links a {
+            color: var(--text-color);
+            margin-left: 15px;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fab fa-github"></i>
+                GitHub Studiu de Caz
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#intro">Introducere</a></li>
+                    <li><a href="#git">Git & GitHub</a></li>
+                    <li><a href="#beneficii">Beneficii</a></li>
+                    <li><a href="#resurse">Resurse</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section class="hero">
+            <h1>Noțiuni introductive despre documentația GitHub</h1>
+            <p>Învață cum să începi să construiești, să distribui și să întreții software cu GitHub. Explorează produsele noastre, creează-ți un cont și conectează-te cu cea mai mare comunitate de dezvoltatori din lume.</p>
+            <button class="btn" id="startBtn">Începe acum</button>
+            <button class="btn btn-secondary" id="learnMoreBtn">Află mai multe</button>
+        </section>
+        
+        <div class="content-grid">
+            <main class="main-content">
+                <section id="intro">
+                    <h2>Studiu de Caz: Importanța Utilizării Aplicațiilor de lucru în echipă GIT / GIT HUB</h2>
+                    <p>Lucrul la un proiect comun necesită unelte de colaborare eficiente. GitHub oferă platforma perfectă pentru gestionarea proiectelor software în echipă.</p>
+                    
+                    <h3>Pregătire rapidă</h3>
+                    
+                    <div class="card">
+                        <h4><i class="fas fa-rocket"></i> Începeți aici</h4>
+                        <p><strong>Popular</strong></p>
+                        <button class="btn btn-secondary" id="popularBtn">Vezi opțiunile populare</button>
+                    </div>
+                    
+                    <h4>Despre GitHub și Git</h4>
+                    <p>Poți utiliza GitHub și Git pentru a colabora la muncă. Git este sistemul de control al versiunilor, iar GitHub este platforma de colaborare bazată pe Git.</p>
+                    <button class="btn" id="gitInfoBtn">Află mai multe despre Git</button>
+                    
+                    <h4>Planurile GitHub-ului</h4>
+                    <p>O prezentare generală a planurilor de prețuri GitHub, de la conturile gratuite la cele pentru întreprinderi.</p>
+                    <button class="btn" id="plansBtn">Vezi planurile de preț</button>
+                    
+                    <h4>Noțiuni introductive despre contul dvs. GitHub</h4>
+                    <p>Cu un cont personal pe GitHub, poți importa sau crea repertorii, colabora cu alții și te poți conecta cu comunitatea GitHub.</p>
+                    <button class="btn" id="accountBtn">Creează cont</button>
+                    
+                    <h4>Noțiuni introductive despre echipa GitHub</h4>
+                    <p>Cu GitHub Team, grupurile de persoane pot colabora în mai multe proiecte simultan, într-un cont de organizație.</p>
+                    <button class="btn" id="teamBtn">Află despre echipe</button>
+                    
+                    <h4>Crearea unui cont pe GitHub</h4>
+                    <p>Creează un cont personal pentru a începe să utilizezi GitHub.</p>
+                    <button class="btn" id="createAccountBtn">Creează cont acum</button>
+                    
+                    <h4>Salut Lume</h4>
+                    <p>Urmează acest exercițiu Hello World pentru a învăța fluxul de lucru pentru solicitările de extragere (pull requests) de pe GitHub.</p>
+                    <button class="btn" id="helloWorldBtn">Începe exercițiul</button>
+                    
+                    <h4>Configurați Git</h4>
+                    <p>În spatele GitHub se află un sistem de control al versiunilor (VCS) open-source numit Git. Git este responsabil pentru tot ceea ce se întâmplă local pe computerul tău, legat de GitHub.</p>
+                    <button class="btn" id="setupGitBtn">Configurare Git</button>
+                    
+                    <h4>Despre versiunile de GitHub Docs</h4>
+                    <p>Poți citi documentația care reflectă produsul GitHub pe care îl utilizezi la prezent.</p>
+                    <button class="btn" id="docsBtn">Vezi documentația</button>
+                </section>
+                
+                <section id="git">
+                    <h3>Git și GitHub pentru lucrul în echipă</h3>
+                    <p>Git este un sistem de control al versiunilor distribuit care permite membrilor echipei să lucreze simultan la același proiect fără a interfera cu munca celorlalți.</p>
+                    
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-code-branch"></i>
+                            <h4>Ramificare</h4>
+                            <p>Crează ramuri separate pentru funcționalități noi fără a afecta codul principal.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-history"></i>
+                            <h4>Istoric</h4>
+                            <p>Urmărește toate modificările și revino la versiuni anterioare dacă este necesar.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-users"></i>
+                            <h4>Colaborare</h4>
+                            <p>Lucrează simultan cu alți dezvoltatori pe același proiect.</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+            
+            <aside class="sidebar">
+                <section id="beneficii">
+                    <h2>Beneficii GitHub</h2>
+                    
+                    <div class="card">
+                        <h4><i class="fas fa-code"></i> Control al versiunilor</h4>
+                        <p>Urmărește și gestionează modificările în codul proiectului tău.</p>
+                        <button class="btn btn-secondary" id="versionControlBtn">Detalii</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h4><i class="fas fa-user-friends"></i> Colaborare</h4>
+                        <p>Lucrează împreună cu alți dezvoltatori din întreaga lume.</p>
+                        <button class="btn btn-secondary" id="collaborationBtn">Detalii</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h4><i class="fas fa-briefcase"></i> Portofoliu</h4>
+                        <p>Construiește un portofoliu de proiecte care demonstrează abilitățile tale.</p>
+                        <button class="btn btn-secondary" id="portfolioBtn">Detalii</button>
+                    </div>
+                </section>
+                
+                <section id="resurse">
+                    <h2>Resurse de învățare</h2>
+                    <ul>
+                        <li>Începeți clădirică</li>
+                        <li>Integrare</li>
+                        <li>Utilizarea GitHub</li>
+                        <li>Învățând despre GitHub</li>
+                        <li>Învață să programezi</li>
+                        <li>Accreditatea</li>
+                        <li>Stateria pe GitHub</li>
+                        <li>Explorează proiecte</li>
+                        <li>Noțiuni de bază despre Git</li>
+                        <li>Folosind Git</li>
+                        <li>Arhivați central și depozitele publice</li>
+                        <li>Utilizarea documentelor GitHub</li>
+                        <li>Certificări GitHub</li>
+                    </ul>
+                    <button class="btn" id="resourcesBtn">Accesează resursele</button>
+                </section>
+            </aside>
+        </div>
+    </div>
+    
+    <!-- Modal pentru crearea contului -->
+    <div class="modal" id="accountModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Creare cont GitHub</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="accountForm">
+                <div class="form-group">
+                    <label for="username">Nume utilizator</label>
+                    <input type="text" id="username" placeholder="Introdu numele de utilizator">
+                </div>
+                <div class="form-group">
+                    <label for="email">Adresă email</label>
+                    <input type="email" id="email" placeholder="Introdu adresa de email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Parolă</label>
+                    <input type="password" id="password" placeholder="Introdu parola">
+                </div>
+                <button type="submit" class="btn">Creează cont</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Modal pentru informații generale -->
+    <div class="modal" id="infoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="infoModalTitle">Informații</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div id="infoModalContent">
+                <p>Conținutul informațiilor va apărea aici.</p>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2023 GitHub Studiu de Caz. Toate drepturile rezervate.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Funcționalitate pentru butoane
+        document.addEventListener('DOMContentLoaded', function() {
+            // Butoane care deschid modale
+            const startBtn = document.getElementById('startBtn');
+            const learnMoreBtn = document.getElementById('learnMoreBtn');
+            const createAccountBtn = document.getElementById('createAccountBtn');
+            const accountBtn = document.getElementById('accountBtn');
+            const accountModal = document.getElementById('accountModal');
+            const infoModal = document.getElementById('infoModal');
+            const closeButtons = document.querySelectorAll('.close-btn');
+            
+            // Butoane pentru informații
+            const gitInfoBtn = document.getElementById('gitInfoBtn');
+            const plansBtn = document.getElementById('plansBtn');
+            const teamBtn = document.getElementById('teamBtn');
+            const helloWorldBtn = document.getElementById('helloWorldBtn');
+            const setupGitBtn = document.getElementById('setupGitBtn');
+            const docsBtn = document.getElementById('docsBtn');
+            const popularBtn = document.getElementById('popularBtn');
+            const versionControlBtn = document.getElementById('versionControlBtn');
+            const collaborationBtn = document.getElementById('collaborationBtn');
+            const portfolioBtn = document.getElementById('portfolioBtn');
+            const resourcesBtn = document.getElementById('resourcesBtn');
+            
+            // Deschidere modal cont
+            function openAccountModal() {
+                accountModal.style.display = 'flex';
+            }
+            
+            // Închidere modal
+            function closeModals() {
+                accountModal.style.display = 'none';
+                infoModal.style.display = 'none';
+            }
+            
+            // Deschidere modal informații
+            function openInfoModal(title, content) {
+                document.getElementById('infoModalTitle').textContent = title;
+                document.getElementById('infoModalContent').innerHTML = content;
+                infoModal.style.display = 'flex';
+            }
+            
+            // Evenimente pentru butoane
+            startBtn.addEventListener('click', function() {
+                openInfoModal('Începe acum', '<p>Pentru a începe cu GitHub, urmează acești pași:</p><ol><li>Creează un cont gratuit</li><li>Instalează Git pe calculatorul tău</li><li>Explorează proiecte open-source</li><li>Creează primul tău repository</li></ol>');
+            });
+            
+            learnMoreBtn.addEventListener('click', function() {
+                openInfoModal('Află mai multe', '<p>GitHub este o platformă de dezvoltare software care utilizează sistemul de control al versiunilor Git. Oferă:</p><ul><li>Gestionarea codului sursă</li><li>Colaborare în echipe</li><li>Tracking al problemelor</li><li>Integrare continuă</li><li>Deployment</li></ul>');
+            });
+            
+            createAccountBtn.addEventListener('click', openAccountModal);
+            accountBtn.addEventListener('click', openAccountModal);
+            
+            gitInfoBtn.addEventListener('click', function() {
+                openInfoModal('Git și GitHub', '<p>Git este un sistem de control al versiunilor distribuit creat de Linus Torvalds în 2005.</p><p>GitHub este o platformă de găzduire a codului sursă care utilizează Git pentru controlul versiunilor.</p><p>Împreună, acestea oferă un mediu puternic pentru colaborarea la proiecte software.</p>');
+            });
+            
+            plansBtn.addEventListener('click', function() {
+                openInfoModal('Planuri GitHub', '<p>GitHub oferă mai multe planuri:</p><ul><li><strong>Free</strong> - pentru proiecte personale și open-source</li><li><strong>Team</strong> - pentru echipe care colaborează</li><li><strong>Enterprise</strong> - pentru organizații mari</li></ul><p>Toate planurile includ depozite nelimitate și colaboratori nelimitați.</p>');
+            });
+            
+            teamBtn.addEventListener('click', function() {
+                openInfoModal('GitHub Team', '<p>GitHub Team permite colaborarea în echipe cu:</p><ul><li>Depozite private</li><li>Acces la funcții de team management</li><li>Revizuirea codului</li><li>Protecție a ramurilor</li><li>Integrări cu instrumente de productivitate</li></ul>');
+            });
+            
+            helloWorldBtn.addEventListener('click', function() {
+                openInfoModal('Salut Lume', '<p>Exercițiul "Hello World" este tradițional pentru a învăța un nou limbaj de programare sau platformă.</p><p>Pe GitHub, acest exercițiu te învață:</p><ol><li>Crearea unui repository</li><li>Crearea unei ramuri</li><li>Modificarea unui fișier</li><li>Deschiderea unui Pull Request</li><li>Îmbinarea (merge) a modificărilor</li></ol>');
+            });
+            
+            setupGitBtn.addEventListener('click', function() {
+                openInfoModal('Configurare Git', '<p>Pentru a configura Git pe calculatorul tău:</p><ol><li>Descarcă și instalează Git de la <a href="https://git-scm.com/" target="_blank">git-scm.com</a></li><li>Deschide terminalul și configurează numele și email-ul:<br><code>git config --global user.name "Numele Tău"</code><br><code>git config --global user.email "email@example.com"</code></li><li>Verifică instalarea cu <code>git --version</code></li></ol>');
+            });
+            
+            docsBtn.addEventListener('click', function() {
+                openInfoModal('Documentația GitHub', '<p>Documentația GitHub este disponibilă în mai multe versiuni pentru a se potrivi cu versiunea de GitHub pe care o utilizezi.</p><p>Poți accesa documentația completă la <a href="https://docs.github.com" target="_blank">docs.github.com</a>.</p>');
+            });
+            
+            popularBtn.addEventListener('click', function() {
+                openInfoModal('Opțiuni populare', '<p>Cele mai populare opțiuni pentru începători pe GitHub:</p><ul><li>Crearea primului repository</li><li>Învățarea despre Pull Requests</li><li>Explorarea proiectelor open-source</li><li>Configurarea profilului</li><li>Participarea la discuții în Issues</li></ul>');
+            });
+            
+            versionControlBtn.addEventListener('click', function() {
+                openInfoModal('Control al versiunilor', '<p>Controlul versiunilor vă permite să:</p><ul><li>Urmăriți modificările în codul sursă</li><li>Reveniți la versiuni anterioare</li><li>Lucați în echipă fără a suprascrie munca altora</li><li>Experimentați cu noi funcționalități în ramuri separate</li></ul>');
+            });
+            
+            collaborationBtn.addEventListener('click', function() {
+                openInfoModal('Colaborare', '<p>GitHub facilitează colaborarea prin:</p><ul><li>Pull Requests pentru a propune și revizui modificări</li><li>Issues pentru a urmări bug-uri și cereri de funcționalități</li><li>Projects pentru a organiza și prioritiza munca</li><li>Discuții pentru a comunica cu colaboratorii</li></ul>');
+            });
+            
+            portfolioBtn.addEventListener('click', function() {
+                openInfoModal('Portofoliu', '<p>GitHub poate servi ca portofoliu profesional prin:</p><ul><li>Arătarea proiectelor tale de cod</li><li>Demonstrarea abilităților de colaborare</li><li>Evidențierea contribuțiilor la proiecte open-source</li><li>Crearea unui site personal cu GitHub Pages</li></ul>');
+            });
+            
+            resourcesBtn.addEventListener('click', function() {
+                openInfoModal('Resurse de învățare', '<p>Resurse disponibile pentru a învăța GitHub:</p><ul><li>Documentația oficială GitHub</li><li>Ghidurile interactive GitHub</li><li>Cursuri online pe platforme precum GitHub Learning Lab</li><li>Comunitatea GitHub cu tutoriale și sfaturi</li><li>Certificări GitHub pentru validarea cunoștințelor</li></ul>');
+            });
+            
+            // Închidere modal la click pe butonul de închidere
+            closeButtons.forEach(button => {
+                button.addEventListener('click', closeModals);
+            });
+            
+            // Închidere modal la click în afara conținutului
+            window.addEventListener('click', function(event) {
+                if (event.target === accountModal) {
+                    closeModals();
+                }
+                if (event.target === infoModal) {
+                    closeModals();
+                }
+            });
+            
+            // Formular pentru crearea contului
+            document.getElementById('accountForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = document.getElementById('username').value;
+                const email = document.getElementById('email').value;
+                
+                if (username && email) {
+                    alert(`Cont creat cu succes pentru ${username}! Verifică-ți email-ul (${email}) pentru a finaliza înregistrarea.`);
+                    closeModals();
+                    document.getElementById('accountForm').reset();
+                } else {
+                    alert('Te rugăm să completezi toate câmpurile obligatorii.');
+                }
+            });
+            
+            // Navigare smooth pentru link-uri interne
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
